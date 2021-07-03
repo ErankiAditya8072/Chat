@@ -1,0 +1,103 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chat Proto</title>
+    <link rel="stylesheet" href="../css/chatstyle.css" />
+    <script
+      src="https://kit.fontawesome.com/ec31267c2f.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chatroom">
+        <div class="searchandUpdate">
+          <input
+            type="text"
+            id="searchname"
+            placeholder="&#xF002; Search"
+            style="font-family: Arial, FontAwesome"
+          />
+        </div>
+        <div id="blockelements"></div>
+        <div id="addNewRoom">
+          <input
+            type="text"
+            placeholder="Type to add a room"
+            id="addnewrooms"
+          />
+          <button id="addroom"><i class="fas fa-plus-circle"></i></button>
+        </div>
+      </div>
+      <div id="chats">
+        <div id="showname">
+          <i class="fas fa-user-circle" id="setsize"></i>
+          <span id="usernamedevice"></span>
+          <button id="edit"><i class="fas fa-pencil-alt"></i></button>
+        </div>
+        <div id="chatsection">
+          <table id="chatcook">
+            <!-- <tr>
+              <td>
+                <div class="right">
+                  <div class="rBody">hello how are you?</div>
+                  <div class="rFoot">now</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="right">
+                  <div class="rBody">hello how are you?</div>
+                  <div class="rFoot">now</div>
+                </div>
+              </td>
+            </tr> -->
+          </table>
+        </div>
+        <div id="addnewchat">
+          <input
+            type="text"
+            placeholder="Type to send something"
+            id="placenew"
+          />
+          <button id="sendbut"><img src="send.svg" /></button>
+        </div>
+        <div id="adduplicatebox"></div>
+      </div>
+      <div id="pop-container">
+        <div id="updatenamebox">
+          <p id="errormessage"></p>
+          <input type="text" placeholder="Your Name" id="updatetext" />
+          <div id="upcan">
+            <button id="up">add</button>
+            <button id="can">cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script src="http://cdn.date-fns.org/v1.9.0/date_fns.min.js"></script>
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyBILIdpgYns0EXWNNsdS9WhIal2I2-JTX8",
+        authDomain: "learningjs-c2c87.firebaseapp.com",
+        projectId: "learningjs-c2c87",
+        storageBucket: "learningjs-c2c87.appspot.com",
+        messagingSenderId: "831647648148",
+        appId: "1:831647648148:web:0b4b6d480086cfd1c3e781",
+        measurementId: "G-3DP35TT4JF",
+      };
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+      const db = firebase.firestore();
+    </script>
+    <script src="../js/chat.js"></script>
+    <script src="../js/chatUI.js"></script>
+    <script src="../js/app.js"></script>
+  </body>
+</html>
