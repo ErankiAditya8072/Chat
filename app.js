@@ -126,7 +126,7 @@ up.addEventListener("click", function (e) {
   if (
     name.length >= 5 &&
     name.length <= 20 &&
-    name != "anonymous" &&
+    !name.includes("anonymous") &&
     pattern.test(name)
   ) {
     users.get().then((fields) => {
@@ -137,8 +137,12 @@ up.addEventListener("click", function (e) {
         checkuname(true, name);
       }
     });
-  } else if (name == "anonymous" && name.length >= 5 && name.length <= 20) {
-    errormessage.textContent = "Must Enter a name";
+  } else if (
+    name.includes("anonymous") &&
+    name.length >= 5 &&
+    name.length <= 20
+  ) {
+    errormessage.textContent = "Must Enter a valid name";
   } else if (
     pattern.test(name) === false &&
     name.length >= 5 &&
