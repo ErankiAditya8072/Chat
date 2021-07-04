@@ -3,6 +3,7 @@ const removeduplicatebox = document.getElementById("adduplicatebox");
 const addnewchat = document.getElementById("addnewchat");
 const placnew = document.querySelector("#placenew");
 const addnewrooms = document.querySelector("#addnewrooms");
+const addnewroombutton = document.querySelector("#addnewroom");
 const sendbutton = document.querySelector("#sendbut");
 class ChatUI {
   constructor(chatsec) {
@@ -93,12 +94,12 @@ const updateshowname = (oldname) => {
     chat = new Chatroom(null, localStorage.username);
     console.log("from else if oldname == anonymous");
   } else {
-    chat.updateRoom(chat.room);
-    chat.updateName(localStorage.username).then(() => {
-      chat.clearchats();
-      chatsgiver();
-      console.log("from else ", chat.username);
-    });
+    // chat.updateRoom(chat.room);
+    chat.updateName(localStorage.username); //.then(() => {
+    //   chat.clearchats();
+    //   chatsgiver();
+    //   console.log("from else ", chat.username);
+    // });
   }
 };
 
@@ -124,14 +125,6 @@ up.addEventListener("click", function (e) {
     users.get().then((fields) => {
       if (fields.data().usernames.length !== 0) {
         const unique = fields.data().usernames.find((uname) => uname === name);
-        //  fields.data().usernames.forEach((uname) => {
-        //     if (name === uname) {
-        //       unique = false;
-        //       checkuname(unique, name);
-        //     } else {
-        //       unique = true;
-        //     }
-        // });
         checkuname(!unique, name, username);
       } else {
         checkuname(true, name);
@@ -162,6 +155,26 @@ addnewrooms.addEventListener("keyup", function (e) {
           room: firebase.firestore.FieldValue.arrayUnion(addroom),
         });
       }
+    }
+  }
+});
+addnewroombutton.addEventListener("click", function (e) {
+  if (addnewrooms.value.trim().length !== 0) {
+    let addroom = addnewrooms.value.trim();
+    let bool = existingroom.find((el) => addroom === el);
+    if (bool) {
+      addnewrooms.value = "";
+      addnewrooms.setAttribute("placeholder", "This room already exists");
+      setTimeout(
+        () => addnewrooms.setAttribute("placeholder", "type to add a room"),
+        5000
+      );
+      console.log("Entered here");
+    } else {
+      addnewrooms.value = "";
+      rooms.update({
+        room: firebase.firestore.FieldValue.arrayUnion(addroom),
+      });
     }
   }
 });
