@@ -121,7 +121,14 @@ const checkuname = (unique, name, oldname) => {
 };
 up.addEventListener("click", function (e) {
   const name = getname.value.trim().toLowerCase();
-  if (name.length >= 5 && name.length <= 20 && name != "anonymous") {
+  const pattern = /^[a-z]{5,15}[0-9]{0,5}$/;
+  console.log(pattern.test(name));
+  if (
+    name.length >= 5 &&
+    name.length <= 20 &&
+    name != "anonymous" &&
+    pattern.test(name)
+  ) {
     users.get().then((fields) => {
       if (fields.data().usernames.length !== 0) {
         const unique = fields.data().usernames.find((uname) => uname === name);
@@ -132,6 +139,12 @@ up.addEventListener("click", function (e) {
     });
   } else if (name == "anonymous" && name.length >= 5 && name.length <= 20) {
     errormessage.textContent = "Must Enter a name";
+  } else if (
+    pattern.test(name) === false &&
+    name.length >= 5 &&
+    name.length <= 20
+  ) {
+    errormessage.textContent = "Enter a valid username";
   } else {
     errormessage.textContent = "username should consist (5-20) characters";
   }
