@@ -62,7 +62,7 @@ const filterroom = (term) => {
   console.log(aelements.children);
   Array.from(aelements.children)
     .filter((room) => !room.textContent.toLowerCase().includes(term))
-    .forEach((room) => room.setAttribute("class", "filtered"));
+    .forEach((room) => room.classList.add("filtered"));
   Array.from(aelements.children)
     .filter((room) => room.textContent.toLowerCase().includes(term))
     .forEach((room) => {

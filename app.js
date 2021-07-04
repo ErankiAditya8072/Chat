@@ -139,7 +139,7 @@ up.addEventListener("click", function (e) {
 addnewrooms.addEventListener("keyup", function (e) {
   if (e.keyCode === 13) {
     if (addnewrooms.value.trim().length !== 0) {
-      let addroom = addnewrooms.value.trim();
+      let addroom = addnewrooms.value.trim().toLowerCase();
       let bool = existingroom.find((el) => addroom === el);
       if (bool) {
         addnewrooms.value = "";
@@ -160,7 +160,7 @@ addnewrooms.addEventListener("keyup", function (e) {
 });
 addnewroombutton.addEventListener("click", function (e) {
   if (addnewrooms.value.trim().length !== 0) {
-    let addroom = addnewrooms.value.trim();
+    let addroom = addnewrooms.value.trim().toLowerCase();
     let bool = existingroom.find((el) => addroom === el);
     if (bool) {
       addnewrooms.value = "";
