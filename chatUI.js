@@ -44,12 +44,32 @@ async function existingrooms() {
 //     });
 //   });
 // }
+async function checkLocalAndUsersDb(initalName){
+  await users.get().then((fields) => {
+      if (fields.data().usernames.length !== 0) {
+        const unique = fields.data().usernames.find((uname) => uname === initalName);
+        if(!unique)
+        {
+          users.update({
+             usernames: firebase.firestore.FieldValue.arrayUnion(initalName),
+           });
+        }
+      }
+      else{
+         users.update({
+         usernames: firebase.firestore.FieldValue.arrayUnion(initalName),
+          });
+         } 
+    });
+}
 window.onload = function () {
   username = localStorage.username ? localStorage.username : "anonymous";
   showname.textContent = username;
   existingrooms();
-  
-  if (username == "anonymous") {
+  if(username != "anonymous")
+  {
+    checkLocalAndUsersDb(username);
+  }else if (username == "anonymous") {
     updatenamebox.setAttribute("class", "pop-container-show");
   }
 };
