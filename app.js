@@ -158,8 +158,9 @@ up.addEventListener("click", function (e) {
       if (fields.data().usernames.length !== 0) {
         const unique = fields.data().usernames.find((uname) => uname === name);
         checkuname(!unique, name, username);
+        console.log(username);
       } else {
-        checkuname(true, name);
+        checkuname(true, name,username);
       }
     });
   } else if (

@@ -1,6 +1,6 @@
 const chatsec = document.getElementById("chatcook");
 const users = db.collection("users").doc("7PtqR1sGNP3mEFMIc1qa");
-
+let username = null;
 class Chatroom {
   constructor(room, username) {
     this.room = room;
@@ -44,7 +44,7 @@ class Chatroom {
         }
       });
     });
-    await users.update({
+      await users.update({
       usernames: firebase.firestore.FieldValue.arrayRemove(this.username),
     });
     this.username = username;

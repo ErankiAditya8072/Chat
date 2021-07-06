@@ -12,7 +12,6 @@ const showname = document.getElementById("usernamedevice");
 const blockelements = document.querySelector("#blockelements");
 var messageBody = document.querySelector("#chatsection");
 messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
-let username = null;
 let room = null;
 let existingroom = [];
 // adding rooms
@@ -66,7 +65,7 @@ window.onload = function () {
   username = localStorage.username ? localStorage.username : "anonymous";
   showname.textContent = username;
   existingrooms();
-  if(username != "anonymous")
+  if(username !== "anonymous")
   {
     checkLocalAndUsersDb(username);
   }else if (username == "anonymous") {
