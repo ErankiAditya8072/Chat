@@ -8,29 +8,25 @@ const sendbutton = document.querySelector("#sendbut");
 class ChatUI {
   constructor(chatsec) {
     this.chatsec = chatsec;
+    this.isToday = true;
   }
   differenceInWords(date){
    const curr = new Date().getTime();
    const past = date.getTime();
-
    const diff = curr-past;
    const secs = Math.abs(Math.round(diff/(1000)))
    const mins = Math.round(secs/(60));
    const hours = Math.round(mins/60);
-
    let str = '';
-  //  if(secs == 0){
-  //    str += 'now';
-  //  }
-  //  else if(secs<60){
-  //    str += secs+' seconds ago';
-  //  }else if(mins < 60){
-  //    str += mins+' minutes ago';
-  //  }else if(hours < 24){
-  //    str += hours+" hours ago";
    if(hours < 24)
    {
-      str+= `${date.getHours()}:${date.getMinutes()}`;
+      if(date.getMinutes() <10)
+      {
+        str+=`${date.getHours()}:0${date.getMinutes()}`;
+      }else{
+        str+= `${date.getHours()}:${date.getMinutes()}`;
+      }
+      
    }else if(hours < 48){
      str += 'Yesterday';
    }else{
@@ -41,10 +37,6 @@ class ChatUI {
  }
   render(data) {
     const when = this.differenceInWords(data.createdAt.toDate());
-    // const when = dateFns.distanceInWordsToNow(data.createdAt.toDate(), {
-    //   addSuffix: true,
-    // });
-    // console.log(this.renderDate(data.createdAt.toDate()));
     if (data.username === chat.username.toLowerCase()) {
       const html = `  
       <tr>
