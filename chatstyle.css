@@ -118,6 +118,7 @@ body {
   overflow: hidden;
   text-transform: capitalize;
   white-space: nowrap;
+  font-smooth: always;
 }
 #blockelements li:hover {
   cursor: pointer;
@@ -263,20 +264,20 @@ body {
 }
 .rBody,
 .lBody {
-  max-width: 380px;
+  max-width: 420px;
   line-height: 20px;
   font-size: 14px;
+  font-smooth: always;
   word-wrap: break-word;
   color:	#3b444b;
 }
-.lBody{
-  text-indent:8px;
-}
+
 .lHead,
 .rHead {
   font-size:12px;
   font-weight: bold;
   color:#3b444b;
+  font-smooth:always;
   text-transform: capitalize;
 }
 .lFoot {
@@ -288,11 +289,12 @@ body {
 }
 .lFoot,
 .rFoot {
-  font-size: 10px;
+  font-size: 11px;
   float:right;
   text-indent:15px;
   padding-top:8px;
   background: none;
+  font-smooth:2em;
 }
 #updatenamebox {
   position: absolute;

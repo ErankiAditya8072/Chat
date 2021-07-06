@@ -34,7 +34,7 @@ class ChatUI {
    }else if(hours < 48){
      str += 'Yesterday';
    }else{
-     str += `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
+     str += `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
    }
 
    return str;
