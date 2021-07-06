@@ -1,6 +1,6 @@
 body {
   margin: 1%;
-  font-family: sans-serif;
+  font-family:sans-serif;
   background-color: #99a8b4;
 }
 #pop-container {
@@ -132,6 +132,7 @@ body {
   width: 100%;
   color: #9aa9b5;
   text-transform: capitalize;
+
   background-color: #f6f7f9;
   border-bottom: 1px solid #d8dde3;
   border-top-right-radius: 4px;
@@ -148,7 +149,8 @@ body {
 #usernamedevice {
   position: relative;
   top: -8px;
-  font-weight: bold;
+  font-weight:bold;
+  font-size:16px;
   color: #051e34;
 }
 #addnewchat {
@@ -262,13 +264,13 @@ body {
 .rBody,
 .lBody {
   max-width: 380px;
-  line-height: 22px;
+  line-height: 20px;
   font-size: 14px;
   word-wrap: break-word;
 }
 .lHead,
 .rHead {
-  font-size: 12px;
+  font-size:12px;
   font-weight: bold;
   text-transform: capitalize;
 }
@@ -279,9 +281,9 @@ body {
 .rFoot {
   font-size: 12px;
   font-weight: bold;
-  line-height: 20px;
+  line-height: 15px;
   float: right;
-
+  text-indent:5px;
   background: none;
 }
 #updatenamebox {

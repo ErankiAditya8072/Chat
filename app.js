@@ -9,14 +9,43 @@ class ChatUI {
   constructor(chatsec) {
     this.chatsec = chatsec;
   }
+  differenceInWords(date){
+   const curr = new Date().getTime();
+   const past = date.getTime();
+
+   const diff = curr-past;
+   const secs = Math.round(diff/(1000))
+   const mins = Math.round(secs/(60));
+   const hours = Math.round(mins/60);
+
+   let str = '';
+   if(secs == 0){
+     str += 'now';
+   }
+   else if(secs<60){
+     str += secs+' seconds ago';
+   }else if(mins < 60){
+     str += mins+' minutes ago';
+   }else if(hours < 24){
+     str += hours+" hours ago";
+   }else if(hours < 48){
+     str += 'Yesterday';
+   }else{
+     str += `${date.getDay()}-${date.getMonth()}-${date.getFullYear()}`;
+   }
+
+   return str;
+ }
   render(data) {
-    const when = dateFns.distanceInWordsToNow(data.createdAt.toDate(), {
-      addSuffix: true,
-    });
+    const when = this.differenceInWords(data.createdAt.toDate());
+    // const when = dateFns.distanceInWordsToNow(data.createdAt.toDate(), {
+    //   addSuffix: true,
+    // });
+    // console.log(this.renderDate(data.createdAt.toDate()));
     if (data.username === chat.username.toLowerCase()) {
       const html = `  
       <tr>
-            <td>
+           <td>
               <div class="right">
                 <div class="rBody">${data.message}</div>
                  <div class="rFoot">${when}</div>

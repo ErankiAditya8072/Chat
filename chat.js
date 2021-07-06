@@ -19,7 +19,8 @@ class Chatroom {
     const response = await this.chats.add(chat);
     return response;
   }
-  async getchats(callback) {
+  async getchats(callback)
+  {
     this.unsub = await this.chats
       .where("room", "==", this.room)
       .orderBy("createdAt")
@@ -31,7 +32,8 @@ class Chatroom {
         });
       });
   }
-  async updateName(username) {
+  async updateName(username)
+  {
     const obj = new Object();
     obj.username = username;
     await this.chats.get().then((snapshot) => {

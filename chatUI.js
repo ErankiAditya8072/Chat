@@ -15,6 +15,7 @@ messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 let username = null;
 let room = null;
 let existingroom = [];
+// adding rooms
 async function existingrooms() {
   await rooms.onSnapshot((snapshot) => {
     snapshot.data().room.forEach((r) => {
@@ -33,24 +34,36 @@ async function existingrooms() {
     });
   });
 }
+// async function CheckLocalAndUsersDB(){
+//   users.onSnapshot((snapshot) => {
+//     snapshot.docChanges().forEach( change => {
+//       if(change.type == "removed")
+//       {
+//        console.log(change.doc.usernames);
+//       }
+//     });
+//   });
+// }
 window.onload = function () {
   username = localStorage.username ? localStorage.username : "anonymous";
   showname.textContent = username;
   existingrooms();
+  
   if (username == "anonymous") {
     updatenamebox.setAttribute("class", "pop-container-show");
   }
 };
-
+//pop up focus
 getname.addEventListener("focus", function (e) {
   errormessage.textContent = "";
 });
+//pop up display
 editupdate.addEventListener("click", function (e) {
   updatenamebox.setAttribute("class", "pop-container-show");
 });
-
+//cancel button
 can.addEventListener("click", function (e) {
-  if (!localStorage.username || localStorage.username === "anonymous") {
+  if (!localStorage.username || localStorage.username.includes("anonymous")) {
     errormessage.textcontent = "Please Enter the username";
   } else {
     updatenamebox.classList.remove("pop-container-show");
@@ -58,6 +71,7 @@ can.addEventListener("click", function (e) {
     getname.value = "";
   }
 });
+//Search
 const filterroom = (term) => {
   console.log(aelements.children);
   Array.from(aelements.children)
@@ -69,9 +83,9 @@ const filterroom = (term) => {
       room.classList.remove("filtered");
     });
 };
+//Search listener
 search.addEventListener("keyup", function (e) {
   const term = search.value.trim().toLowerCase();
-  console.log(term);
   filterroom(term);
 });
 
