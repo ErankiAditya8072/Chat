@@ -14,20 +14,23 @@ class ChatUI {
    const past = date.getTime();
 
    const diff = curr-past;
-   const secs = Math.round(diff/(1000))
+   const secs = Math.abs(Math.round(diff/(1000)))
    const mins = Math.round(secs/(60));
    const hours = Math.round(mins/60);
 
    let str = '';
-   if(secs == 0){
-     str += 'now';
-   }
-   else if(secs<60){
-     str += secs+' seconds ago';
-   }else if(mins < 60){
-     str += mins+' minutes ago';
-   }else if(hours < 24){
-     str += hours+" hours ago";
+  //  if(secs == 0){
+  //    str += 'now';
+  //  }
+  //  else if(secs<60){
+  //    str += secs+' seconds ago';
+  //  }else if(mins < 60){
+  //    str += mins+' minutes ago';
+  //  }else if(hours < 24){
+  //    str += hours+" hours ago";
+   if(hours < 24)
+   {
+      str+= `${date.getHours()}:${date.getMinutes()}`;
    }else if(hours < 48){
      str += 'Yesterday';
    }else{
@@ -47,9 +50,10 @@ class ChatUI {
       <tr>
            <td>
               <div class="right">
-                <div class="rBody">${data.message}</div>
-                 <div class="rFoot">${when}</div>
-              </div>
+                <div class="rBody">${data.message}
+                <span class="rFoot">${when}</span>
+                </div>
+                </div>
             </td>
           </tr>`;
       this.chatsec.innerHTML += html;
@@ -58,9 +62,9 @@ class ChatUI {
             <td>
               <div class="left">
                 <div class="lHead">${data.username}</div>
-                <div class="lBody">${data.message}</div>
-                 <div class="lFoot">${when}</div>
-               </div>
+                <div class="lBody">${data.message}
+                <span class="lFoot">${when}</span></div>
+                </div>
               
             </td>
           </tr>`;

@@ -249,13 +249,13 @@ body {
   border-top-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  padding: 13px 10px 10px 10px;
+  padding: 13px 10px 5px 10px;
 }
 .left {
   float: left;
   margin-top: 2%;
   margin-left: 5%;
-  padding: 13px 10px 10px 10px;
+  padding: 13px 10px 5px 10px;
   background-color: white;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -267,23 +267,31 @@ body {
   line-height: 20px;
   font-size: 14px;
   word-wrap: break-word;
+  color:	#3b444b;
+}
+.lBody{
+  text-indent:8px;
 }
 .lHead,
 .rHead {
   font-size:12px;
   font-weight: bold;
+  color:#3b444b;
   text-transform: capitalize;
 }
 .lFoot {
-  color: gainsboro;
+  color:#778899;
+  
+}
+.rFoot{
+  color:#0a2338;
 }
 .lFoot,
 .rFoot {
-  font-size: 12px;
-  font-weight: bold;
-  line-height: 15px;
-  float: right;
-  text-indent:5px;
+  font-size: 10px;
+  float:right;
+  text-indent:15px;
+  padding-top:8px;
   background: none;
 }
 #updatenamebox {
