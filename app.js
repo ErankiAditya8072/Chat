@@ -111,6 +111,7 @@ blockelements.addEventListener("click", function (e) {
         const li = e.target;
         changeli(li);
         const room = li.textContent;
+        chatui.previous_date=null;
         if (!chat) {
           chat = new Chatroom(room, localStorage.username);
         } else {
