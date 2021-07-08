@@ -7,37 +7,72 @@ const addnewroombutton = document.querySelector("#addnewroom");
 const sendbutton = document.querySelector("#sendbut");
 class ChatUI {
   constructor(chatsec) {
-    this.chatsec = chatsec;
-    this.isToday = true;
+      this.chatsec = chatsec;
+      this.previous_date=null;
+      this.curr = new Date();
+      this.yesterday = new Date()
+      this.yesterday.setDate(this.curr.getDate()-1);
+      this.twodaysago = new Date();
+      this.twodaysago.setDate(this.yesterday.getDate()-1);
+      this.threedaysago = new Date();
+      this.threedaysago.setDate(this.yesterday.getDate()-2);
+      this.fourdaysago = new Date();
+      this.fourdaysago.setDate(this.yesterday.getDate()-3);
+      this.fivedaysago = new Date();
+      this.fivedaysago = new Date();
+      this.fivedaysago.setDate(this.yesterday.getDate()-4);
+      this.sixdaysago = new Date();
+      this.sixdaysago.setDate(this.yesterday.getDate()-5);
+      this.count=0;
+  }
+  getDateChats(date){
+      const newdate = new Date(date);
+      const monthname=newdate.toLocaleString('default', { month: 'long' });
+      if(this.curr.toDateString () == date.toDateString())
+      {
+        return `Today`;
+      }
+      else if( date.toDateString() == this.yesterday.toDateString())
+      {
+        return 'Yesterday';
+      }
+      else if(this.twodaysago.toDateString() == date.toDateString() || 
+               this.threedaysago.toDateString() == date.toDateString() ||
+               this.fourdaysago.toDateString() == date.toDateString() ||
+               this.fivedaysago.toDateString() == date.toDateString() ||
+               this.sixdaysago.toDateString() == date.toDateString())
+      {
+        return `${date.toLocaleString('locale',{weekday:'long'})}`;
+      }
+      return `${monthname} ${date.getDate()}, ${date.getFullYear()}`;
   }
   differenceInWords(date){
-   const curr = new Date().getTime();
-   const past = date.getTime();
-   const diff = curr-past;
-   const secs = Math.abs(Math.round(diff/(1000)))
-   const mins = Math.round(secs/(60));
-   const hours = Math.round(mins/60);
-   let str = '';
-   if(hours < 24)
-   {
+      let str = '';
+      console.log(date);
       if(date.getMinutes() <10)
-      {
-        str+=`${date.getHours()}:0${date.getMinutes()}`;
-      }else{
-        str+= `${date.getHours()}:${date.getMinutes()}`;
-      }
-      
-   }else if(hours < 48){
-     str += 'Yesterday';
-   }else{
-     str += `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
-   }
-
-   return str;
+        {
+            str+=`${date.getHours()}:0${date.getMinutes()}`;
+        }else{
+            str+= `${date.getHours()}:${date.getMinutes()}`;
+        }
+      return str;
  }
   render(data) {
-    const when = this.differenceInWords(data.createdAt.toDate());
-    if (data.username === chat.username.toLowerCase()) {
+     const when = this.differenceInWords(data.createdAt.toDate());
+     const date = this.getDateChats(data.createdAt.toDate());
+   
+    if(!this.previous_date)
+    {
+       let html = `<tr><td><div class="spacemore"><span>${date}</span></div></td></tr>`
+       this.previous_date = date
+       this.chatsec.innerHTML += html;
+    }
+    else if(!(this.previous_date=== date)){
+      let html = `<tr class="space"><td><div class="dateheading"><span>${date}</span></div></td></tr>`
+       this.previous_date = date
+       this.chatsec.innerHTML += html;
+    }
+   if (data.username === chat.username.toLowerCase()) {
       const html = `  
       <tr>
            <td>
@@ -72,23 +107,23 @@ const chatsgiver = () => {
   chat.getchats((data) => chatui.render(data));
 };
 blockelements.addEventListener("click", function (e) {
-  console.log("clicked");
-  if (e.target.tagName === "LI") {
-    const li = e.target;
-    changeli(li);
-    const room = li.textContent;
-    if (!chat) {
-      chat = new Chatroom(room, localStorage.username);
-    } else {
-      console.log(chat.username);
-      chat.updateRoom(room);
-    }
-    removeduplicatebox.setAttribute("id", "removeduplicatebox");
-    addnewchat.setAttribute("id", "addoriginal");
-    chat.clearchats();
-    chatsgiver();
-    placenew.focus();
-  }
+      console.log("clicked");
+      if (e.target.tagName === "LI") {
+        const li = e.target;
+        changeli(li);
+        const room = li.textContent;
+        if (!chat) {
+          chat = new Chatroom(room, localStorage.username);
+        } else {
+          console.log(chat.username);
+          chat.updateRoom(room);
+        }
+        removeduplicatebox.setAttribute("id", "removeduplicatebox");
+        addnewchat.setAttribute("id", "addoriginal");
+        chat.clearchats();
+        chatsgiver();
+        placenew.focus();
+      }
 });
 placenew.addEventListener("keyup", function (e) {
   if (e.keyCode === 13) {

@@ -246,6 +246,7 @@ body {
   float: right;
   margin-top: 1%;
   margin-right: 5%;
+  margin-bottom:0.5%;
   padding: 8px 8px 2px 8px;
   background-color: #00ff80;
   color: #303841;
@@ -256,8 +257,9 @@ body {
 }
 .left {
   float: left;
-  margin-top: 1%;
+  margin-top:1%;
   margin-left: 5%;
+  margin-bottom:0.5%;
   padding: 8px 8px 2px 8px;
   background-color: white;
   border-top-right-radius:8px;
@@ -364,6 +366,24 @@ body {
   background-color: #dc143c;
   cursor: pointer;
   color: white;
+}
+.dateheading{
+  text-align:center;
+  margin-top:2%;
+  margin-bottom:1.5%;
+}
+.spacemore{
+  text-align:center;
+  margin-top:2%;
+  margin-bottom:2.5%;
+}
+.dateheading span,.spacemore span{
+  background:#e1f2fa;
+  color:#4a4a4a;
+  font-size:12px;
+  padding:8px 10px 8px 10px;
+  border-radius:4px;
+
 }
 
 .activated {
