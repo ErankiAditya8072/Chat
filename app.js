@@ -48,7 +48,6 @@ class ChatUI {
   }
   differenceInWords(date){
       let str = '';
-      console.log(date);
       if(date.getMinutes() <10)
         {
             str+=`${date.getHours()}:0${date.getMinutes()}`;
