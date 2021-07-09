@@ -239,7 +239,6 @@ body {
 }
 #chatsection::-webkit-scrollbar-thumb {
   background-color: #c8c8c8; /* color of the scroll thumb */
-  /* border-radius:3px; roundness of the scroll thumb */
   /* border: 3px solid orange; creates padding around scroll thumb */
 }
 .right {
@@ -378,8 +377,9 @@ body {
   margin-bottom:2.5%;
 }
 .dateheading span,.spacemore span{
-  background:#e1f2fa;
-  color:#4a4a4a;
+  background:#bfe1ff;
+  color:#051e34;
+  font-weight:bold;
   font-size:12px;
   padding:8px 10px 8px 10px;
   border-radius:4px;
