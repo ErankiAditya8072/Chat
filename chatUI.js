@@ -14,7 +14,6 @@ var messageBody = document.querySelector("#chatsection");
 messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
 let room = null;
 let existingroom = [];
-// adding rooms
 async function existingrooms() {
   await rooms.onSnapshot((snapshot) => {
     snapshot.data().room.forEach((r) => {
@@ -33,42 +32,11 @@ async function existingrooms() {
     });
   });
 }
-// async function CheckLocalAndUsersDB(){
-//   users.onSnapshot((snapshot) => {
-//     snapshot.docChanges().forEach( change => {
-//       if(change.type == "removed")
-//       {
-//        console.log(change.doc.usernames);
-//       }
-//     });
-//   });
-// }
-async function checkLocalAndUsersDb(initalName){
-  await users.get().then((fields) => {
-      if (fields.data().usernames.length !== 0) {
-        const unique = fields.data().usernames.find((uname) => uname === initalName);
-        if(!unique)
-        {
-          users.update({
-             usernames: firebase.firestore.FieldValue.arrayUnion(initalName),
-           });
-        }
-      }
-      else{
-         users.update({
-         usernames: firebase.firestore.FieldValue.arrayUnion(initalName),
-          });
-         } 
-    });
-}
 window.onload = function () {
   username = localStorage.username ? localStorage.username : "anonymous";
   showname.textContent = username;
   existingrooms();
-  if(username !== "anonymous")
-  {
-    checkLocalAndUsersDb(username);
-  }else if (username == "anonymous") {
+  if (username == "anonymous") {
     updatenamebox.setAttribute("class", "pop-container-show");
   }
 };

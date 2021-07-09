@@ -24,6 +24,8 @@ class ChatUI {
       this.sixdaysago = new Date();
       this.sixdaysago.setDate(this.yesterday.getDate()-5);
       this.count=0;
+      this.count1=0;
+      this.count2=1;
   }
   getDateChats(date){
       const newdate = new Date(date);
@@ -71,19 +73,54 @@ class ChatUI {
        this.previous_date = date
        this.chatsec.innerHTML += html;
     }
-   if (data.username === chat.username.toLowerCase()) {
-      const html = `  
-      <tr>
-           <td>
-              <div class="right">
-                <div class="rBody">${data.message}
-                <span class="rFoot">${when}</span>
+   if (data.username === chat.username.toLowerCase()) {  
+      if (this.count1 == 0)
+      {
+          this.count1=1;
+          this.count2=1;
+          const html = `  
+          <tr>
+              <td>
+                  <div class="right1">
+                    <div class="rBody">${data.message}
+                    <span class="rFoot">${when}</span>
+                    </div>
+                    </div>
+                </td>
+              </tr>`;
+          this.chatsec.innerHTML += html;
+      }
+      else{
+          const html = `  
+          <tr>
+              <td>
+                  <div class="right">
+                    <div class="rBody">${data.message}
+                    <span class="rFoot">${when}</span>
+                    </div>
+                    </div>
+                </td>
+              </tr>`;
+          this.chatsec.innerHTML += html;
+      }
+    } else {
+      if (this.count2 == 1)
+      {
+        this.count2=0;
+        this.count1=0;
+         const html = ` <tr>
+            <td>
+              <div class="left1">
+                <div class="lHead">${data.username}</div>
+                <div class="lBody">${data.message}
+                <span class="lFoot">${when}</span></div>
                 </div>
-                </div>
+              
             </td>
           </tr>`;
       this.chatsec.innerHTML += html;
-    } else {
+      }
+      else{
       const html = ` <tr>
             <td>
               <div class="left">
@@ -95,6 +132,7 @@ class ChatUI {
             </td>
           </tr>`;
       this.chatsec.innerHTML += html;
+      }
     }
     placenew.focus();
     messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
@@ -106,16 +144,16 @@ const chatsgiver = () => {
   chat.getchats((data) => chatui.render(data));
 };
 blockelements.addEventListener("click", function (e) {
-      console.log("clicked");
       if (e.target.tagName === "LI") {
         const li = e.target;
         changeli(li);
         const room = li.textContent;
         chatui.previous_date=null;
+        this.count1=0;
+        this.count2=1;
         if (!chat) {
           chat = new Chatroom(room, localStorage.username);
         } else {
-          console.log(chat.username);
           chat.updateRoom(room);
         }
         removeduplicatebox.setAttribute("id", "removeduplicatebox");
@@ -144,22 +182,11 @@ const updateshowname = (oldname) => {
   showname.textContent = localStorage.username;
   if (!chat && oldname != "anonymous") {
     chat = new Chatroom(null, oldname);
-    console.log(
-      "from if statement updateshowname",
-      localStorage.username,
-      oldname
-    );
-    chat.updateName(localStorage.username);
+   chat.updateName(localStorage.username);
   } else if (oldname === "anonymous" && !chat) {
     chat = new Chatroom(null, localStorage.username);
-    console.log("from else if oldname == anonymous");
   } else {
-    // chat.updateRoom(chat.room);
-    chat.updateName(localStorage.username); //.then(() => {
-    //   chat.clearchats();
-    //   chatsgiver();
-    //   console.log("from else ", chat.username);
-    // });
+    chat.updateName(localStorage.username);
   }
 };
 
@@ -173,7 +200,6 @@ const checkuname = (unique, name, oldname) => {
     updatenamebox.classList.remove("pop-container-show");
     errormessage.textContent = "";
     getname.value = "";
-    console.log(localStorage.username, oldname, "from check uname");
     updateshowname(oldname);
   } else {
     errormessage.textContent = "username already exists";
@@ -182,7 +208,6 @@ const checkuname = (unique, name, oldname) => {
 up.addEventListener("click", function (e) {
   const name = getname.value.trim().toLowerCase();
   const pattern = /^[a-z]{5,15}[0-9]{0,5}$/;
-  console.log(pattern.test(name));
   if (
     name.length >= 5 &&
     name.length <= 20 &&
@@ -193,7 +218,6 @@ up.addEventListener("click", function (e) {
       if (fields.data().usernames.length !== 0) {
         const unique = fields.data().usernames.find((uname) => uname === name);
         checkuname(!unique, name, username);
-        console.log(username);
       } else {
         checkuname(true, name,username);
       }

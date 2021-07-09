@@ -48,7 +48,6 @@ class Chatroom {
       usernames: firebase.firestore.FieldValue.arrayRemove(this.username),
     });
     this.username = username;
-    console.log(this.username, "from UpdateName method in class");
   }
   async updateRoom(room) {
     this.room = room;
