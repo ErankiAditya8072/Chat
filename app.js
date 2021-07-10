@@ -157,6 +157,7 @@ const chatsgiver = () => {
 blockelements.addEventListener("click", function (e) {
       if (e.target.tagName === "LI") {
         const li = e.target;
+        if(!li.classList.contains('activated')){
         changeli(li);
         const room = li.textContent;
         chatui.previous_date=null;
@@ -171,6 +172,7 @@ blockelements.addEventListener("click", function (e) {
         chatsgiver();
         placenew.focus();
       }
+    }
 });
 placenew.addEventListener("keyup", function (e) {
   if (e.keyCode === 13) {
