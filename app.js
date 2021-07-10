@@ -23,7 +23,7 @@ class ChatUI {
       this.fivedaysago.setDate(this.yesterday.getDate()-4);
       this.sixdaysago = new Date();
       this.sixdaysago.setDate(this.yesterday.getDate()-5);
-      this.count=0;
+      this.previous_name=null;
       this.count1=0;
       this.count2=1;
   }
@@ -67,11 +67,17 @@ class ChatUI {
        let html = `<tr><td><div class="spacemore"><span>${date}</span></div></td></tr>`
        this.previous_date = date
        this.chatsec.innerHTML += html;
+       this.count1=0;
+       this.count2=1;
+       this.previous_name=null;
     }
     else if(!(this.previous_date=== date)){
       let html = `<tr class="space"><td><div class="dateheading"><span>${date}</span></div></td></tr>`
        this.previous_date = date
        this.chatsec.innerHTML += html;
+       this.count1=0;
+       this.count2=1;
+       this.previous_name=null;
     }
    if (data.username === chat.username.toLowerCase()) {  
       if (this.count1 == 0)
@@ -104,8 +110,13 @@ class ChatUI {
           this.chatsec.innerHTML += html;
       }
     } else {
-      if (this.count2 == 1)
+      if(!this.previous_name)
       {
+          this.previous_name = data.username;
+      }
+      if (this.count2 == 1 || this.previous_name!== data.username)
+      {
+        this.previous_name=data.username;
         this.count2=0;
         this.count1=0;
          const html = ` <tr>
@@ -121,17 +132,17 @@ class ChatUI {
       this.chatsec.innerHTML += html;
       }
       else{
-      const html = ` <tr>
-            <td>
-              <div class="left">
-                <div class="lHead">${data.username}</div>
-                <div class="lBody">${data.message}
-                <span class="lFoot">${when}</span></div>
-                </div>
-              
-            </td>
-          </tr>`;
-      this.chatsec.innerHTML += html;
+          this.previous_name = data.username;
+          const html = ` <tr>
+                <td>
+                  <div class="left">
+                    <div class="lBody">${data.message}
+                    <span class="lFoot">${when}</span></div>
+                    </div>
+                  
+                </td>
+              </tr>`;
+          this.chatsec.innerHTML += html;
       }
     }
     placenew.focus();
@@ -149,8 +160,6 @@ blockelements.addEventListener("click", function (e) {
         changeli(li);
         const room = li.textContent;
         chatui.previous_date=null;
-        this.count1=0;
-        this.count2=1;
         if (!chat) {
           chat = new Chatroom(room, localStorage.username);
         } else {
