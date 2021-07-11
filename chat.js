@@ -5,6 +5,7 @@ class Chatroom {
   constructor(room, username) {
     this.room = room;
     this.username = username;
+    this.username1= username;
     this.chats = db.collection("chats");
     this.chatsection = chatsec;
   }
@@ -32,11 +33,12 @@ class Chatroom {
         });
       });
   }
-  async updateName(username)
+   async updateName(username)
   {
+    this.username1=username;
     const obj = new Object();
     obj.username = username;
-    await this.chats.get().then((snapshot) => {
+     await this.chats.get().then((snapshot) => {
       snapshot.docs.forEach((doc) => {
         if (doc.data().username == this.username) {
           let id = doc.id;
@@ -47,7 +49,7 @@ class Chatroom {
       await users.update({
       usernames: firebase.firestore.FieldValue.arrayRemove(this.username),
     });
-    this.username = username;
+     this.username = username;
   }
   async updateRoom(room) {
     this.room = room;

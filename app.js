@@ -79,7 +79,7 @@ class ChatUI {
        this.count2=1;
        this.previous_name=null;
     }
-   if (data.username === chat.username.toLowerCase()) {  
+   if (data.username === chat.username.toLowerCase() || data.username === chat.username1.toLowerCase()) {  
       if (this.count1 == 0)
       {
           this.count1=1;
@@ -193,12 +193,13 @@ const updateshowname = (oldname) => {
   showname.textContent = localStorage.username;
   if (!chat && oldname != "anonymous") {
     chat = new Chatroom(null, oldname);
-   chat.updateName(localStorage.username);
+    chat.updateName(localStorage.username);
   } else if (oldname === "anonymous" && !chat) {
     chat = new Chatroom(null, localStorage.username);
   } else {
-    chat.updateName(localStorage.username);
+     chat.updateName(localStorage.username);
   }
+  updatenamebox.classList.remove("pop-container-show");
 };
 
 const checkuname = (unique, name, oldname) => {
@@ -208,7 +209,6 @@ const checkuname = (unique, name, oldname) => {
     });
     getname.value = "";
     localStorage.setItem("username", name);
-    updatenamebox.classList.remove("pop-container-show");
     errormessage.textContent = "";
     getname.value = "";
     updateshowname(oldname);
